@@ -1,0 +1,92 @@
+{
+    "School_Only1F_Hard": {
+        "checkpoints": [
+            {
+                "steps": 99946,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-99946.onnx",
+                "reward": -0.2595110966099633,
+                "creation_time": 1631970702.6593843,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-99946.pt"
+                ]
+            },
+            {
+                "steps": 199952,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-199952.onnx",
+                "reward": 0.37030002338190876,
+                "creation_time": 1631971260.4344747,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-199952.pt"
+                ]
+            },
+            {
+                "steps": 299998,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-299998.onnx",
+                "reward": -0.11814812635485497,
+                "creation_time": 1631971886.5629263,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-299998.pt"
+                ]
+            },
+            {
+                "steps": 399991,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-399991.onnx",
+                "reward": -0.7281999588012695,
+                "creation_time": 1631972505.3530843,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-399991.pt"
+                ]
+            },
+            {
+                "steps": 499950,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-499950.onnx",
+                "reward": -0.7547333339850107,
+                "creation_time": 1631973143.0519621,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-499950.pt"
+                ]
+            },
+            {
+                "steps": 599982,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-599982.onnx",
+                "reward": -0.4675882143954582,
+                "creation_time": 1631973863.21632,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-599982.pt"
+                ]
+            },
+            {
+                "steps": 699995,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-699995.onnx",
+                "reward": -0.31081109224922127,
+                "creation_time": 1631974502.9944208,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-699995.pt"
+                ]
+            },
+            {
+                "steps": 702901,
+                "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-702901.onnx",
+                "reward": null,
+                "creation_time": 1631974527.390693,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-702901.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 702901,
+            "file_path": "results\\School_Only1F_Harde_1\\School_Only1F_Hard.onnx",
+            "reward": null,
+            "creation_time": 1631974527.390693,
+            "auxillary_file_paths": [
+                "results\\School_Only1F_Harde_1\\School_Only1F_Hard\\School_Only1F_Hard-702901.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

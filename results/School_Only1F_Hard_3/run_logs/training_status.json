@@ -1,0 +1,155 @@
+{
+    "School_Only1F_Hard": {
+        "checkpoints": [
+            {
+                "steps": 99994,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-99994.onnx",
+                "reward": 0.6145049370233975,
+                "creation_time": 1632113000.7244947,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-99994.pt"
+                ]
+            },
+            {
+                "steps": 199995,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-199995.onnx",
+                "reward": 0.6224128210943349,
+                "creation_time": 1632113646.2105806,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-199995.pt"
+                ]
+            },
+            {
+                "steps": 299994,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-299994.onnx",
+                "reward": 0.8425543308258057,
+                "creation_time": 1632114203.168771,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-299994.pt"
+                ]
+            },
+            {
+                "steps": 399994,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-399994.onnx",
+                "reward": 0.6626099663622239,
+                "creation_time": 1632114747.8095615,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-399994.pt"
+                ]
+            },
+            {
+                "steps": 499973,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-499973.onnx",
+                "reward": 0.49367673980428817,
+                "creation_time": 1632115302.1265304,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-499973.pt"
+                ]
+            },
+            {
+                "steps": 599960,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-599960.onnx",
+                "reward": 0.6124020546244887,
+                "creation_time": 1632115926.4480658,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-599960.pt"
+                ]
+            },
+            {
+                "steps": 699997,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-699997.onnx",
+                "reward": 0.7256775757958812,
+                "creation_time": 1632116445.6198826,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-699997.pt"
+                ]
+            },
+            {
+                "steps": 799995,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-799995.onnx",
+                "reward": 0.6604496219109014,
+                "creation_time": 1632116999.7730074,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-799995.pt"
+                ]
+            },
+            {
+                "steps": 899978,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-899978.onnx",
+                "reward": 0.3439475501838483,
+                "creation_time": 1632117500.3180056,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-899978.pt"
+                ]
+            },
+            {
+                "steps": 999977,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-999977.onnx",
+                "reward": 0.6746508244673411,
+                "creation_time": 1632118026.3347988,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-999977.pt"
+                ]
+            },
+            {
+                "steps": 1099991,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1099991.onnx",
+                "reward": 0.41828198730945587,
+                "creation_time": 1632118552.0744345,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1099991.pt"
+                ]
+            },
+            {
+                "steps": 1199964,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1199964.onnx",
+                "reward": 0.5466915813939912,
+                "creation_time": 1632119105.2947793,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1199964.pt"
+                ]
+            },
+            {
+                "steps": 1299996,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1299996.onnx",
+                "reward": 1.2156001403927803,
+                "creation_time": 1632119613.0273244,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1299996.pt"
+                ]
+            },
+            {
+                "steps": 1399974,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1399974.onnx",
+                "reward": 0.5682436152212862,
+                "creation_time": 1632120171.0557027,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1399974.pt"
+                ]
+            },
+            {
+                "steps": 1400414,
+                "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1400414.onnx",
+                "reward": 0.5999876358546317,
+                "creation_time": 1632120172.9422946,
+                "auxillary_file_paths": [
+                    "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1400414.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1400414,
+            "file_path": "results\\School_Only1F_Hard_3\\School_Only1F_Hard.onnx",
+            "reward": 0.5999876358546317,
+            "creation_time": 1632120172.9422946,
+            "auxillary_file_paths": [
+                "results\\School_Only1F_Hard_3\\School_Only1F_Hard\\School_Only1F_Hard-1400414.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.26.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
