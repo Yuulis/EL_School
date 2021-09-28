@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: School_Only1F_Hard
+  m_BehaviorName: School_Only1F_Hard_Cur
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -392,7 +392,6 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  param_SpawnableAreaNum: 0
   Floor: {fileID: 7010785752018835582}
   Exit1: {fileID: 7010785753172444358}
   Exit2: {fileID: 7010785751872599010}

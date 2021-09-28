@@ -14,7 +14,6 @@ public class AgentControl : Agent
     private bool inSpawnArea;
     private int ClosestExit;  // Closest Exit when Agent spawns
     private int ReachedExit;  // Exit Agent reached
-    private int distanceFlag;
 
     // Env parameter
     float param_SpawnableAreaNum;
@@ -151,25 +150,17 @@ public class AgentControl : Agent
         if (ClosestExit == 2) distanceToClosestExit = Vector3.Distance(this.transform.localPosition, Exit2.transform.localPosition);
         if (ClosestExit == 3) distanceToClosestExit = Vector3.Distance(this.transform.localPosition, Exit3.transform.localPosition);
 
-        if (distanceToClosestExit < 40f && distanceFlag == 5)
+        if (distanceToClosestExit < 30f)
         {
-            AddReward(0.2f);
-            distanceFlag--;
+            AddReward(0.0001f);
         }
-        if (distanceToClosestExit < 30f && distanceFlag == 4)
+        else if (distanceToClosestExit < 20f)
         {
-            AddReward(0.2f);
-            distanceFlag--;
+            AddReward(0.0002f);
         }
-        if (distanceToClosestExit < 20f && distanceFlag == 3)
+        else if (distanceToClosestExit < 10f)
         {
-            AddReward(0.2f);
-            distanceFlag--;
-        }
-        if (distanceToClosestExit < 10f && distanceFlag == 2)
-        {
-            AddReward(0.2f);
-            distanceFlag--;
+            AddReward(0.0005f);
         }
     }
 
@@ -203,11 +194,11 @@ public class AgentControl : Agent
 
     public override void OnEpisodeBegin()
     {
+        if (settings.TrainingMode == 3) SetEnvParams();
         onEpisode = false;
         inSpawnArea = false;
         ClosestExit = 0;
         ReachedExit = 0;
-        distanceFlag = 5;
         SpawnAgent();
     }
 
