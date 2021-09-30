@@ -1,5 +1,4 @@
 behaviors:
-
   #Training Mode = 3
   School_Only1F_Hard_Cur:
     trainer_type: ppo
@@ -38,12 +37,67 @@ behaviors:
         encoding_size: 64
         learning_rate: 3e-4
 
-curriculum:
-  School_Only1F_Hard_Cur:
-    measure: reward
-    thresholds: [0.8, 0.7, 0.7]
-    min_lesson_length: 100
-    signal_smoothing: true
-    parameters:
-      param_SpawnableAreaNum: [0.0, 1.0, 2.0, 3.0]
-      param_StepReward: [0.0, 0.0, 0.0, -0.0005]
+environment_parameters:
+  SpawnableAreaNum:
+    curriculum:
+      - name: B_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: School_Only1F_Hard_Cur
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.8
+        value: 0.0
+
+      - name: A_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: School_Only1F_Hard_Cur
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.7
+        value: 1.0
+
+      - name: C_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: School_Only1F_Hard_Cur
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.7
+        value: 2.0
+
+      - name: All
+        value: 3.0
+
+  StepReward:
+    curriculum:
+      - name: B_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: School_Only1F_Hard_Cur
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.8
+        value: 0.0
+
+      - name: A_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: School_Only1F_Hard_Cur
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.7
+        value: 0.0
+
+      - name: C_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: School_Only1F_Hard_Cur
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.7
+        value: 0.0
+
+      - name: Lesson3
+        value: -0.0005
