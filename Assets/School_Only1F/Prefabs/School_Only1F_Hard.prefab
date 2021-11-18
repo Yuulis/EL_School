@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 61748945507052063}
   - component: {fileID: 61748945507052060}
   - component: {fileID: 61748945507052055}
-  - component: {fileID: 3388986082224542154}
+  - component: {fileID: 5997605472967189752}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Agent
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 15
+    VectorObservationSize: 18
     NumStackedVectorObservations: 3
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DecisionPeriod: 10
   TakeActionsBetweenDecisions: 1
---- !u!114 &3388986082224542154
+--- !u!114 &5997605472967189752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 61748945507052052}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12aa99a8fa041844c8203c2c6e976cd0, type: 3}
+  m_Script: {fileID: 11500000, guid: f7b22704628660e42b990d4086a43de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:

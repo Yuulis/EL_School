@@ -12,12 +12,6 @@ public class AgentControl : Agent
     // General
     private bool onEpisode;
     private bool inSpawnArea;
-    private int ClosestExit;  // Closest Exit when Agent spawns
-    private int ReachedExit;  // Exit Agent reached
-
-    // Env parameter
-    float param_SpawnableAreaNum;
-    float param_StepReward;
 
     // Agent
     Rigidbody Agent_rb;
@@ -50,48 +44,7 @@ public class AgentControl : Agent
         {
             this.transform.localPosition = new Vector3(UnityEngine.Random.Range(1.5f, 96.5f), 3.5f, UnityEngine.Random.Range(-30.5f, -2.5f));
         }
-
-        // Only1F_Hard
-        else if (settings.TrainingMode == 3)
-        {
-            if (param_SpawnableAreaNum == 0f)
-            {
-                // B stair side
-                this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
-            }
-
-            else if (param_SpawnableAreaNum == 1f)
-            {
-                int rand = Random.Range(0, 1 + 1);
-                // A stair side
-                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-            }
-
-            else if (param_SpawnableAreaNum == 2f)
-            {
-                int rand = Random.Range(0, 2 + 1);
-
-                // C stair side
-                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-                else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
-            }
-
-            else if (param_SpawnableAreaNum == 3f)
-            {
-                int rand = Random.Range(0, 5 + 1);
-                // All
-                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
-                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-                else if (rand == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                else if (rand == 4) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-                else if (rand == 5) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
-            }
-        }
-
-
+        
         // Reset Agent's status
         Agent_rb.angularVelocity = Vector3.zero;
         Agent_rb.velocity = Vector3.zero;
@@ -124,55 +77,6 @@ public class AgentControl : Agent
         FloorRenderer.material = FloorMaterial;
     }
 
-    void GetClosestExitNum()
-    {
-        float disToExit1 = Vector3.Distance(this.transform.localPosition, Exit1.transform.localPosition);
-        float disToExit2 = Vector3.Distance(this.transform.localPosition, Exit2.transform.localPosition);
-        float disToExit3 = Vector3.Distance(this.transform.localPosition, Exit3.transform.localPosition);
-
-        float m = Mathf.Min(disToExit1, Mathf.Min(disToExit2, disToExit3));
-        if (m == disToExit1) ClosestExit = 1;
-        else if (m == disToExit2) ClosestExit = 2;
-        else if (m == disToExit3) ClosestExit = 3;
-    }
-
-    void GetReachedExitNum(string ExitName)
-    {
-        if (ExitName == "Exit1") ReachedExit = 1;
-        else if (ExitName == "Exit2") ReachedExit = 2;
-        else if (ExitName == "Exit3") ReachedExit = 3;
-    }
-
-    void AddRewardByDistance()
-    {
-        float distanceToClosestExit = 0f;
-        if (ClosestExit == 1) distanceToClosestExit = Vector3.Distance(this.transform.localPosition, Exit1.transform.localPosition);
-        if (ClosestExit == 2) distanceToClosestExit = Vector3.Distance(this.transform.localPosition, Exit2.transform.localPosition);
-        if (ClosestExit == 3) distanceToClosestExit = Vector3.Distance(this.transform.localPosition, Exit3.transform.localPosition);
-
-        if (distanceToClosestExit < 30f)
-        {
-            AddReward(0.0001f);
-        }
-        else if (distanceToClosestExit < 20f)
-        {
-            AddReward(0.0002f);
-        }
-        else if (distanceToClosestExit < 10f)
-        {
-            AddReward(0.0005f);
-        }
-    }
-
-    // Get environment parameters
-    public void SetEnvParams()
-    {
-        EnvironmentParameters EnvParams = Academy.Instance.EnvironmentParameters;
-
-        this.param_SpawnableAreaNum = EnvParams.GetWithDefault("SpawnableAreaNum", 3f);
-        this.param_StepReward = EnvParams.GetWithDefault("StepReward", 0f);
-    }
-
     public override void Initialize()
     {
         Agent_rb = GetComponent<Rigidbody>();
@@ -194,11 +98,8 @@ public class AgentControl : Agent
 
     public override void OnEpisodeBegin()
     {
-        if (settings.TrainingMode == 3) SetEnvParams();
         onEpisode = false;
         inSpawnArea = false;
-        ClosestExit = 0;
-        ReachedExit = 0;
         SpawnAgent();
     }
 
@@ -206,7 +107,6 @@ public class AgentControl : Agent
     {
         if (onEpisode)
         {
-            if (settings.TrainingMode == 3) AddRewardByDistance();
             MoveAgent(actions.DiscreteActions);
 
             if (this.transform.localPosition.y < 0f)
@@ -217,7 +117,7 @@ public class AgentControl : Agent
                     GoalScoredSwapGroundMaterial(settings.Failed_Floor, 0.5f));
             }
 
-            AddReward(this.param_StepReward);
+            AddReward(-1.0f / MaxStep);
         }
     }
 
@@ -238,16 +138,9 @@ public class AgentControl : Agent
         {
             if (collision.gameObject.CompareTag("Exit"))
             {
-                if (settings.TrainingMode == 3) GetReachedExitNum(collision.gameObject.name);
-
                 if (settings.TrainingMode == 1 || settings.TrainingMode == 2)
                 {
                     AddReward(1.0f);
-                }
-                else if (settings.TrainingMode == 3)
-                {
-                    if (ClosestExit == ReachedExit) AddReward(1.0f);
-                    else AddReward(0.5f);
                 }
 
                 EndEpisode();
@@ -287,7 +180,6 @@ public class AgentControl : Agent
         if (other.gameObject.CompareTag("SpawnArea"))
         {
             inSpawnArea = true;
-            if (settings.TrainingMode == 3) GetClosestExitNum();
         }
     }
 }
