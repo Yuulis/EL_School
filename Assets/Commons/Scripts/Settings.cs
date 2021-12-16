@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
-    // Training mode (1: OnlyExit, 2: Only1F_Easy, 3: Only1F_Hard_1)
+    // Training mode 
+    // 1 : Only1F_Cur
+    // 2 : Only1F_Demo
     public int TrainingMode;
 
     // When Agent could run away, it will use this material for a few seconds.

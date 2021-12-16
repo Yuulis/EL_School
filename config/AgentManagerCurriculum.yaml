@@ -1,11 +1,11 @@
 behaviors:
-  #Training Mode = 3
+  #Training Mode = 1
   School_Only1F_Hard_Cur:
     trainer_type: ppo
 
-    max_steps: 20000000
+    max_steps: 10000000
     keep_checkpoints: 200
-    checkpoint_interval: 500000
+    checkpoint_interval: 100000
     time_horizon: 96
     summary_freq: 10000
     threaded: true
@@ -33,7 +33,7 @@ behaviors:
 
       curiosity:
         gamma: 0.995
-        strength: 0.01
+        strength: 0.05
         encoding_size: 64
         learning_rate: 3e-4
 
@@ -79,7 +79,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 0.8
-        value: -0.00015
+        value: -0.0002
 
       - name: A_StairSide
         completion_criteria:
@@ -88,7 +88,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 0.7
-        value: -0.00015
+        value: -0.0002
 
       - name: C_StairSide
         completion_criteria:
@@ -97,7 +97,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 0.7
-        value: -0.00015
+        value: -0.0002
 
       - name: Lesson3
-        value: -0.00025
+        value: -0.0003
