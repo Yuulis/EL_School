@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Unity.Barracuda;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
@@ -10,15 +11,26 @@ using Unity.MLAgents.Actuators;
 public class AgentControl : Agent
 {
     // General
-    public bool DoCurriculum;  // Dp curriculum training?
+    public bool doCurriculum;  // Dp curriculum training?
+    private int configuration;  // configuration num
     private bool onEpisode;
     private bool inSpawnArea;
-    private int ClosestExit;  // Closest Exit when Agent spawns
-    private int ReachedExit;  // Exit Agent reached
+    private int closestExit;  // Closest Exit when Agent spawns
+    private int reachedExit;  // Exit Agent reached
 
     // Env parameter (for TrainingMode = 1)
     float param_SpawnableAreaNum;
     float param_StepReward;
+
+    // NNModels
+    public NNModel A_StairSide_Brain;
+    public NNModel B_StairSide_Brain;
+    public NNModel C_StairSide_Brain;
+
+    // Behavior names
+    string A_StairSide_BehaviorName = "EL_A_StairSide";
+    string B_StairSide_BehaviorName = "EL_B_StairSide";
+    string C_StairSide_BehaviorName = "EL_C_StairSide";
 
     // Agent
     Rigidbody Agent_rb;
@@ -43,12 +55,13 @@ public class AgentControl : Agent
         // Only1F_Hard_Cur
         if (settings.TrainingMode == 1)
         {
-            if (DoCurriculum)
+            if (doCurriculum)
             {
                 // B stair side
                 if (param_SpawnableAreaNum == 0f)
                 {
                     this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
+                    configuration = 0;
                 }
 
                 // A stair side
@@ -58,6 +71,8 @@ public class AgentControl : Agent
 
                     if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
                     else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+
+                    configuration = 1;
                 }
 
                 // C stair side
@@ -68,6 +83,8 @@ public class AgentControl : Agent
                     if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
                     else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
                     else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+
+                    configuration = 2;
                 }
 
                 // All
@@ -75,12 +92,37 @@ public class AgentControl : Agent
                 {
                     int rand = Random.Range(0, 5 + 1);
 
-                    if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
-                    else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                    else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-                    else if (rand == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                    else if (rand == 4) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-                    else if (rand == 5) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                    if (rand == 0)
+                    {
+                        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
+                        configuration = 0;
+                    }
+                    else if (rand == 1)
+                    {
+                        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                        configuration = 1;
+                    }
+                    else if (rand == 2)
+                    {
+                        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                        configuration = 1;
+                    }
+                    else if (rand == 3)
+                    {
+                        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                        configuration = 2;
+                    }
+                    else if (rand == 4)
+                    {
+                        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                        configuration = 2;
+                    }
+                    else if (rand == 5)
+                    {
+                        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                        configuration = 2;
+                    }
+
                 }
             }
 
@@ -89,13 +131,36 @@ public class AgentControl : Agent
                 // All
                 int rand = Random.Range(0, 5 + 1);
 
-                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
-                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-                else if (rand == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
-                else if (rand == 4) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
-                else if (rand == 5) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
-
+                if (rand == 0)
+                {
+                    this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
+                    configuration = 0;
+                }
+                else if (rand == 1)
+                {
+                    this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                    configuration = 1;
+                }
+                else if (rand == 2)
+                {
+                    this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                    configuration = 1;
+                }
+                else if (rand == 3)
+                {
+                    this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                    configuration = 2;
+                }
+                else if (rand == 4)
+                {
+                    this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                    configuration = 2;
+                }
+                else if (rand == 5)
+                {
+                    this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                    configuration = 2;
+                }
             }
 
         }
@@ -139,25 +204,40 @@ public class AgentControl : Agent
         float disToExit3 = Vector3.Distance(this.transform.localPosition, Exit3.transform.localPosition);
 
         float m = Mathf.Min(disToExit1, Mathf.Min(disToExit2, disToExit3));
-        if (m == disToExit1) ClosestExit = 1;
-        else if (m == disToExit2) ClosestExit = 2;
-        else if (m == disToExit3) ClosestExit = 3;
+        if (m == disToExit1) closestExit = 1;
+        else if (m == disToExit2) closestExit = 2;
+        else if (m == disToExit3) closestExit = 3;
     }
 
     void GetReachedExitNum(string ExitName)
     {
-        if (ExitName == "Exit1") ReachedExit = 1;
-        else if (ExitName == "Exit2") ReachedExit = 2;
-        else if (ExitName == "Exit3") ReachedExit = 3;
+        if (ExitName == "Exit1") reachedExit = 1;
+        else if (ExitName == "Exit2") reachedExit = 2;
+        else if (ExitName == "Exit3") reachedExit = 3;
     }
 
-    // Get environment parameters (for TrainingMode = 1)
-    public void SetEnvParams()
+    // Agent configuration
+    public void ConfigureAgent(int config)
     {
-        EnvironmentParameters EnvParams = Academy.Instance.EnvironmentParameters;
+        if (doCurriculum)
+        {
+            EnvironmentParameters EnvParams = Academy.Instance.EnvironmentParameters;
+            this.param_SpawnableAreaNum = EnvParams.GetWithDefault("SpawnableAreaNum", 3f);
+            this.param_StepReward = EnvParams.GetWithDefault("StepReward", 0f);
+        }
 
-        this.param_SpawnableAreaNum = EnvParams.GetWithDefault("SpawnableAreaNum", 3f);
-        this.param_StepReward = EnvParams.GetWithDefault("StepReward", 0f);
+        if (config == 0)
+        {
+            SetModel(B_StairSide_BehaviorName, B_StairSide_Brain);
+        }
+        if (config == 1)
+        {
+            SetModel(A_StairSide_BehaviorName, A_StairSide_Brain);
+        }
+        if (config == 2)
+        {
+            SetModel(C_StairSide_BehaviorName, C_StairSide_Brain);
+        }
     }
 
     public override void Initialize()
@@ -182,12 +262,12 @@ public class AgentControl : Agent
 
     public override void OnEpisodeBegin()
     {
-        if (settings.TrainingMode == 1 && DoCurriculum) SetEnvParams();
+        if (settings.TrainingMode == 1 && doCurriculum) ConfigureAgent(configuration);
 
         onEpisode = false;
         inSpawnArea = false;
-        ClosestExit = 0;
-        ReachedExit = 0;
+        closestExit = 0;
+        reachedExit = 0;
 
         SpawnAgent();
     }
@@ -229,7 +309,7 @@ public class AgentControl : Agent
         {
             if (collision.gameObject.CompareTag("Exit"))
             {
-                if (ClosestExit == ReachedExit) AddReward(1.5f);
+                if (closestExit == reachedExit) AddReward(1.5f);
                 else AddReward(0.75f);
 
                 EndEpisode();

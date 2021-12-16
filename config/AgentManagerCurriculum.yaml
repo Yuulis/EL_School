@@ -100,4 +100,4 @@ environment_parameters:
         value: -0.0002
 
       - name: Lesson3
-        value: -0.0003
+        value: -0.00025

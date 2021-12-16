@@ -376,6 +376,10 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
+  doCurriculum: 1
+  A_StairSide_Brain: {fileID: 0}
+  B_StairSide_Brain: {fileID: 0}
+  C_StairSide_Brain: {fileID: 0}
   Floor: {fileID: 7010785752018835582}
   Exit1: {fileID: 7010785753172444358}
   Exit2: {fileID: 7010785751872599010}
