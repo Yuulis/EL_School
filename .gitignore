@@ -17,6 +17,7 @@
 **/ProBuilder Data/
 
 # results
+**/results/**/run_logs/
 **/results/**/*.onnx
 **/results/**/*.pt
 

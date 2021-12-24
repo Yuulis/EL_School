@@ -5,8 +5,7 @@ using UnityEngine;
 public class Settings : MonoBehaviour
 {
     // Training mode 
-    // 1 : Only1F_Cur
-    // 2 : Only1F_Demo
+    // 1 : Only1F
     public int TrainingMode;
 
     // When Agent could run away, it will use this material for a few seconds.
@@ -17,4 +16,7 @@ public class Settings : MonoBehaviour
 
     // Agent speed
     public float AgentSpeed = 0.6f;
+
+    // Draw trail?
+    public bool DrawTrail = false;
 }
