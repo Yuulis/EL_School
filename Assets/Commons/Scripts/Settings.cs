@@ -19,4 +19,7 @@ public class Settings : MonoBehaviour
 
     // Draw trail?
     public bool DrawTrail = false;
+
+    // Export CSV file?
+    public bool DoCSVEXport = false;
 }

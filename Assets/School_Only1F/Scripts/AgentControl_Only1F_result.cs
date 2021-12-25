@@ -7,6 +7,8 @@ using Unity.Barracuda;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using System.IO;
+using System.Text;
 
 public class AgentControl_Only1F_result : Agent
 {
@@ -44,6 +46,12 @@ public class AgentControl_Only1F_result : Agent
     // Other Scripts
     Settings settings;
     DataCountScript dataCountScript;
+    CSVExport csvExportScript;
+
+    // CSV Export
+    private float SpawnPosX;
+    private float SpawnPosZ;
+    private int ReachedExitNum;
 
 
     // Agent Spawn
@@ -84,6 +92,9 @@ public class AgentControl_Only1F_result : Agent
                 configuration = 2;
             }
         }
+
+        SpawnPosX = this.transform.localPosition.x;
+        SpawnPosZ = this.transform.localPosition.z;
 
         // Reset Agent's status
         Agent_rb.angularVelocity = Vector3.zero;
@@ -160,6 +171,7 @@ public class AgentControl_Only1F_result : Agent
 
         settings = FindObjectOfType<Settings>();
         dataCountScript = FindObjectOfType<DataCountScript>();
+        csvExportScript = FindObjectOfType<CSVExport>();
 
         FloorRenderer = Floor.GetComponent<Renderer>();
         FloorMaterial = FloorRenderer.material;
@@ -182,10 +194,13 @@ public class AgentControl_Only1F_result : Agent
 
     public override void OnEpisodeBegin()
     {
+        if (dataCountScript.EpisodeCounter > 5000) csvExportScript.FinishCSVExport();
+
         onEpisode = false;
         inSpawnArea = false;
         closestExit = 0;
         reachedExit = 0;
+        ReachedExitNum = 0;
 
         SpawnAgent();
         if (settings.TrainingMode == 1) ConfigureAgent(configuration);
@@ -204,6 +219,16 @@ public class AgentControl_Only1F_result : Agent
 
                 dataCountScript.EpisodeCounter++;
                 dataCountScript.UpdateCountText();
+
+                if (settings.DoCSVEXport)
+                {
+                    csvExportScript.SaveData(
+                    SpawnPosX.ToString(),
+                    SpawnPosZ.ToString(),
+                    "0",
+                    ReachedExitNum.ToString()
+                    );
+                }
 
                 EndEpisode();
                 StartCoroutine(
@@ -237,10 +262,32 @@ public class AgentControl_Only1F_result : Agent
 
                 dataCountScript.EpisodeCounter++;
                 dataCountScript.SuccessCounter++;
-                if (collision.gameObject.name[4] == '1') dataCountScript.ReachedExit1Counter++;
-                else if (collision.gameObject.name[4] == '2') dataCountScript.ReachedExit2Counter++;
-                else if (collision.gameObject.name[4] == '3') dataCountScript.ReachedExit3Counter++;
+                if (collision.gameObject.name[4] == '1')
+                {
+                    dataCountScript.ReachedExit1Counter++;
+                    ReachedExitNum = 1;
+                }
+                else if (collision.gameObject.name[4] == '2')
+                {
+                    dataCountScript.ReachedExit2Counter++;
+                    ReachedExitNum = 2;
+                }
+                else if (collision.gameObject.name[4] == '3')
+                {
+                    dataCountScript.ReachedExit3Counter++;
+                    ReachedExitNum = 3;
+                }
                 dataCountScript.UpdateCountText();
+
+                if (settings.DoCSVEXport)
+                {
+                    csvExportScript.SaveData(
+                    SpawnPosX.ToString(),
+                    SpawnPosZ.ToString(),
+                    "1",
+                    ReachedExitNum.ToString()
+                    );
+                }
 
                 EndEpisode();
                 StartCoroutine(
@@ -253,6 +300,16 @@ public class AgentControl_Only1F_result : Agent
 
                 dataCountScript.EpisodeCounter++;
                 dataCountScript.UpdateCountText();
+
+                if (settings.DoCSVEXport)
+                {
+                    csvExportScript.SaveData(
+                    SpawnPosX.ToString(),
+                    SpawnPosZ.ToString(),
+                    "0",
+                    ReachedExitNum.ToString()
+                    );
+                }
 
                 EndEpisode();
                 StartCoroutine(
