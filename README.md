@@ -3,14 +3,16 @@
 Using [ML-Agents](https://github.com/Unity-Technologies/ml-agents) in [Release 17](https://github.com/Unity-Technologies/ml-agents/tree/release_17).  
 
 ## Environments
-1. School_Only1F
+1. School_Only1F (Curriculum Learning)
 
 ---
-## Env-2. School_Only1F
-1. School_Only1F_Cur
+## Env-1. School_Only1F
 
 ### Image
-* School_Only1F_Hard_Cur
+![Stage](images/Stage_Only1F.png)
+
+### Environment
+
 
 ### Agent
 
