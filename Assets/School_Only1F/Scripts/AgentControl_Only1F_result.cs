@@ -194,7 +194,7 @@ public class AgentControl_Only1F_result : Agent
 
     public override void OnEpisodeBegin()
     {
-        if (dataCountScript.EpisodeCounter > 5000) csvExportScript.FinishCSVExport();
+        if (dataCountScript.EpisodeCounter > 10000) csvExportScript.FinishCSVExport();
 
         onEpisode = false;
         inSpawnArea = false;
@@ -327,7 +327,19 @@ public class AgentControl_Only1F_result : Agent
 
             else if (collision.gameObject.CompareTag("UpStair") || collision.gameObject.CompareTag("DownStair") || collision.gameObject.CompareTag("Obstacle"))
             {
-                SpawnAgent();
+                dataCountScript.EpisodeCounter++;
+
+                if (settings.DoCSVEXport)
+                {
+                    csvExportScript.SaveData(
+                    SpawnPosX.ToString(),
+                    SpawnPosZ.ToString(),
+                    "-1",
+                    ReachedExitNum.ToString()
+                    );
+
+                    EndEpisode();
+                }
             }
         }
     }

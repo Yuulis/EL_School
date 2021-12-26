@@ -7,20 +7,20 @@ import pandas as pd
 fig = plt.figure(figsize=(10, 5), tight_layout=True)
 plt.subplots_adjust(wspace=0.2, hspace=0.1)
 
-FILE_NAME = "3FloorLv4_result_2021-11-02-15-43-40.csv"
+FILE_NAME = "Only1F_result_2021-12-26-16-19-30.csv"
 
 # Input data
 ax_Success = fig.add_subplot(
-    221, title="Success?", xlabel="X pos", ylabel="Z pos")
+    211, title="Success?", xlabel="X pos", ylabel="Z pos")
 Success_Data = pd.read_csv(FILE_NAME, usecols=[0, 1, 2], dtype="float")
 
 ax_ReachedExit = fig.add_subplot(
-    222, title="Reached Exit", xlabel="X pos", ylabel="Z pos")
+    212, title="Reached Exit", xlabel="X pos", ylabel="Z pos")
 ReachedExit_Data = pd.read_csv(FILE_NAME, usecols=[0, 1, 3], dtype="float")
 
 # DataFrame
 df_success = pd.DataFrame(Success_Data, columns=["X", "Z", "Success?"])
-df_ReachedExit = pd.DataFrame(ReachedExit_Data, columns=["X", "Z", "ReachExit"])
+df_ReachedExit = pd.DataFrame(ReachedExit_Data, columns=["X", "Z", "ReachedExit"])
 
 # Success?
 colorList_1 = {-1: "gray", 0: "red", 1: "green"}
@@ -38,8 +38,8 @@ ax_Success.legend()
 colorList_2 = {0: "gray", 1: "red", 2: "blue", 3: "green"}
 labelName_2 = {0: "Failure", 1: "1", 2: "2", 3: "3"}
 
-for r in set(df_ReachedExit["Reached Exit"]):
-    df2_ReachStair1 = df_ReachedExit[df_ReachedExit["Reached Exit"] == r]
+for r in set(df_ReachedExit["ReachedExit"]):
+    df2_ReachStair1 = df_ReachedExit[df_ReachedExit["ReachedExit"] == r]
     c = colorList_2[r]
     l = labelName_2[r]
     ax_ReachedExit.scatter(
