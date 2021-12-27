@@ -57,3 +57,17 @@ Here is the result video. *The video is slow, this is due to the specs of my PC 
 ![result video](https://user-images.githubusercontent.com/79734873/147444470-8b665edb-289f-4361-b69f-fd716cac849f.mp4)  
 Look it on [My Twitter](https://twitter.com/Yuulis04/status/1475024424101621761).
 
+Here are graph :
+
+![Reward graph](/images/graph_reward.png)  
+![Reward graph](/images/graph_episode-length.png)
+
+Here is the scatter plot. Please compare environment map.
+
+![scatter plot](/images/Only1F_result_2021-12-26-16-19-30.png)
+
+Finally here is result of each value.
+
+![scatter plot](/images/Only1F_result_value_2021-12-26-16-19-30.png)
+
+**Agent has a 90% chance to evacuate from 1F of this school!**
