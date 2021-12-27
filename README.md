@@ -55,5 +55,5 @@ Max step of each Behavior is below :
 ### Result
 Here is the result video. *The video is slow, this is due to the specs of my PC :(  
 ![result video](https://user-images.githubusercontent.com/79734873/147444470-8b665edb-289f-4361-b69f-fd716cac849f.mp4)  
-Look at ![My Twitter](https://twitter.com/Yuulis04/status/1475024424101621761).
+Look it on [My Twitter](https://twitter.com/Yuulis04/status/1475024424101621761).
 
