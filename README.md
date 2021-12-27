@@ -41,11 +41,11 @@ Training starts from ``SpawnableAreaNum = 0``.
 
 Max step of each Behavior is below :  
 
-| Behavior Name | Max Step |
-|:-------------:|:--------:|
-|EL_B_StairSide | 1000000  |
-|EL_A_StairSide | 10000000 |
-|EL_C_StairSide | 10000000 |
+| Behavior Name | Max Step   |
+|:-------------:|:----------:|
+|EL_B_StairSide | 1,000,000  |
+|EL_A_StairSide | 10,000,000 |
+|EL_C_StairSide | 10,000,000 |
 
 ### Rewards
 * Agent gets ``StepReward`` set by Curriculum training at every step.
@@ -54,4 +54,6 @@ Max step of each Behavior is below :
 
 ### Result
 Here is the result video. *The video is slow, this is due to the specs of my PC :(  
-![result video](https://user-images.githubusercontent.com/79734873/147444470-8b665edb-289f-4361-b69f-fd716cac849f.mp4)
+![result video](https://user-images.githubusercontent.com/79734873/147444470-8b665edb-289f-4361-b69f-fd716cac849f.mp4)  
+Look at ![My Twitter](https://twitter.com/Yuulis04/status/1475024424101621761).
+
