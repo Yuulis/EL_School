@@ -6,6 +6,7 @@ public class Settings : MonoBehaviour
 {
     // Training mode 
     // 1 : Only1F
+    // 2 : From2F
     public int TrainingMode;
 
     // When Agent could run away, it will use this material for a few seconds.
@@ -16,6 +17,9 @@ public class Settings : MonoBehaviour
 
     // Agent speed
     public float AgentSpeed = 0.6f;
+
+    // Curriculum training?
+    public bool doCurriculum;
 
     // Draw trail?
     public bool DrawTrail = false;

@@ -1,6 +1,6 @@
 behaviors:
   #Training Mode = 1
-  #School_Only1F_Hard_Cur
+  #School_Only1F_Cur
   EL_B_StairSide:
     trainer_type: ppo
 
