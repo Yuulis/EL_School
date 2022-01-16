@@ -135,33 +135,39 @@ public class AgentControl_From2F : Agent
         if (settings.doCurriculum)
         {
             EnvironmentParameters EnvParams = Academy.Instance.EnvironmentParameters;
-            this.param_SpawnableAreaNum = EnvParams.GetWithDefault("SpawnableAreaNum", 3f);
+            this.param_SpawnableAreaNum = EnvParams.GetWithDefault("SpawnableAreaNum", 10f);
             this.param_StepReward = EnvParams.GetWithDefault("StepReward", 0f);
         }
 
         if (config == 10)
         {
             SetModel(B1_StairSide_BehaviorName, B1_StairSide_Brain);
+            nowFloor = 1;
         }
-        else  if (config == 11)
+        else if (config == 11)
         {
             SetModel(A1_StairSide_BehaviorName, A1_StairSide_Brain);
+            nowFloor = 1;
         }
         else if (config == 12)
         {
             SetModel(C1_StairSide_BehaviorName, C1_StairSide_Brain);
+            nowFloor = 1;
         }
         else if (config == 20)
         {
             SetModel(B2_StairSide_BehaviorName, B2_StairSide_Brain);
+            nowFloor = 2;
         }
         else if (config == 21)
         {
             SetModel(A2_StairSide_BehaviorName, A2_StairSide_Brain);
+            nowFloor = 2;
         }
         else if (config == 22)
         {
             SetModel(C2_StairSide_BehaviorName, C2_StairSide_Brain);
+            nowFloor = 2;
         }
     }
 
@@ -202,11 +208,11 @@ public class AgentControl_From2F : Agent
         closestStair = 0;
         reachedStair = 0;
 
-        Debug.Log("Reset");
-
-        if (settings.TrainingMode == 2 && settings.doCurriculum) ConfigureAgent(configuration);
-
-        spawnAgentScript.SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
+        if (settings.TrainingMode == 2)
+        {
+            if (settings.doCurriculum) ConfigureAgent(configuration);
+            spawnAgentScript.SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
+        }
 
         // Reset Agent's status
         Agent_rb.angularVelocity = Vector3.zero;
@@ -251,7 +257,7 @@ public class AgentControl_From2F : Agent
                     GoalScoredSwapGroundMaterial(settings.Success_Floor, 0.5f));
             }
 
-            else if (collision.gameObject.CompareTag("Obstacle"))
+            else if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("Wall"))
             {
                 AddReward(-1.0f);
                 EndEpisode();
@@ -267,20 +273,21 @@ public class AgentControl_From2F : Agent
 
                 if (collision.gameObject.name == "StairA_1_1")
                 {
-                    this.transform.Translate(-3.0f, 5.0f, 1.0f);
+                    this.transform.Translate(-3.0f, 5.0f, -1.0f);
                     this.transform.Rotate(0f, 180f, 0f);
                 }
                 else if (collision.gameObject.name == "StairB_1_1")
                 {
                     this.transform.Translate(0.0f, 5.0f, 12.5f);
-                    this.transform.Rotate(0f, 180f, 0f);
+                    this.transform.Rotate(0f, 0f, 0f);
                 }
                 else if (collision.gameObject.name == "StairC_1_1")
                 {
-                    this.transform.Translate(3.0f,-5.0f, 1.0f);
+                    this.transform.Translate(3.0f, 5.0f, -1.0f);
                     this.transform.Rotate(0f, 180f, 0f);
                 }
 
+                nowFloor++;
                 AddReward(-0.625f);
             }
 
@@ -306,6 +313,7 @@ public class AgentControl_From2F : Agent
                     this.transform.Rotate(0f, 180f, 0f);
                 }
 
+                nowFloor--;
                 GetReachedStairNum(collision.gameObject.name);
                 if (closestStair == reachedStair) AddReward(0.75f);
                 else AddReward(0.375f);

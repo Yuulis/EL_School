@@ -40998,6 +40998,9 @@ MonoBehaviour:
   Success_Floor: {fileID: 2100000, guid: 51d566047a1e06847abf1f224a2702a2, type: 2}
   Failed_Floor: {fileID: 2100000, guid: 951ce14af2f14dc44a752e91c4f5a2ea, type: 2}
   AgentSpeed: 0.6
+  doCurriculum: 0
+  DrawTrail: 0
+  DoCSVEXport: 0
 --- !u!1 &7010785753023024000
 GameObject:
   m_ObjectHideFlags: 0
