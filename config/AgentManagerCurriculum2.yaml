@@ -113,9 +113,9 @@ behaviors:
         strength: 0.05
         encoding_size: 64
         learning_rate: 3e-4
-  
 
-    1F_B_StairSide:
+
+  1F_B_StairSide:
     trainer_type: ppo
 
     max_steps: 2000000
@@ -232,33 +232,6 @@ behaviors:
 environment_parameters:
   SpawnableAreaNum:
     curriculum:
-      - name: 2F_B_StairSide
-        completion_criteria:
-          measure: reward
-          behavior: 2F_B_StairSide
-          signal_smoothing: true
-          min_lesson_length: 100
-          threshold: 0.6
-        value: 20.0
-
-      - name: 2F_A_StairSide
-        completion_criteria:
-          measure: reward
-          behavior: 2F_A_StairSide
-          signal_smoothing: true
-          min_lesson_length: 100
-          threshold: 0.5
-        value: 21.0
-
-      - name: 2F_C_StairSide
-        completion_criteria:
-          measure: reward
-          behavior: 2F_C_StairSide
-          signal_smoothing: true
-          min_lesson_length: 100
-          threshold: 0.5
-        value: 22.0
-
       - name: 1F_B_StairSide
         completion_criteria:
           measure: reward
@@ -286,12 +259,6 @@ environment_parameters:
           threshold: 0.5
         value: 12.0
 
-        - name: All
-          value: 30.0
-
-
-  StepReward:
-    curriculum:
       - name: 2F_B_StairSide
         completion_criteria:
           measure: reward
@@ -299,7 +266,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 0.6
-        value: -0.0002
+        value: 20.0
 
       - name: 2F_A_StairSide
         completion_criteria:
@@ -308,7 +275,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 0.5
-        value: -0.0002
+        value: 21.0
 
       - name: 2F_C_StairSide
         completion_criteria:
@@ -317,8 +284,14 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 0.5
-        value: -0.0002
+        value: 22.0
 
+      - name: All
+        value: 30.0
+
+
+  StepReward:
+    curriculum:
       - name: 1F_B_StairSide
         completion_criteria:
           measure: reward
@@ -346,5 +319,32 @@ environment_parameters:
           threshold: 0.5
         value: -0.0002
 
-        - name: All
-          value: -0.00025
+      - name: 2F_B_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: 2F_B_StairSide
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.6
+        value: -0.0002
+
+      - name: 2F_A_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: 2F_A_StairSide
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.5
+        value: -0.0002
+
+      - name: 2F_C_StairSide
+        completion_criteria:
+          measure: reward
+          behavior: 2F_C_StairSide
+          signal_smoothing: true
+          min_lesson_length: 100
+          threshold: 0.5
+        value: -0.0002
+
+      - name: All
+        value: -0.00025
