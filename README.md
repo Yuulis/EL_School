@@ -4,6 +4,7 @@ Using [ML-Agents](https://github.com/Unity-Technologies/ml-agents) in [Release 1
 
 ## Environments
 1. **School_Only1F** (Curriculum Learning)
+1. **School_From2F** (Curriculum Learning) << Training now
 
 ---
 ## Env-1. School_Only1F
