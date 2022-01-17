@@ -62,7 +62,6 @@ public class AgentControl_From2F : Agent
 
     // Other Scripts
     Settings settings;
-    SpawnAgentScript spawnAgentScript;
 
 
     // Move Agent
@@ -175,7 +174,6 @@ public class AgentControl_From2F : Agent
     {
         Agent_rb = GetComponent<Rigidbody>();
         settings = FindObjectOfType<Settings>();
-        spawnAgentScript = GetComponent<SpawnAgentScript>();
 
         FloorRenderer = Floor.GetComponent<Renderer>();
         FloorMaterial = FloorRenderer.material;
@@ -210,8 +208,8 @@ public class AgentControl_From2F : Agent
 
         if (settings.TrainingMode == 2)
         {
+            SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
             if (settings.doCurriculum) ConfigureAgent(configuration);
-            spawnAgentScript.SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
         }
 
         // Reset Agent's status
@@ -288,7 +286,7 @@ public class AgentControl_From2F : Agent
                 }
 
                 nowFloor++;
-                AddReward(-0.625f);
+                AddReward(-0.7f);
             }
 
             else if (collision.gameObject.CompareTag("DownStair"))
@@ -315,8 +313,8 @@ public class AgentControl_From2F : Agent
 
                 nowFloor--;
                 GetReachedStairNum(collision.gameObject.name);
-                if (closestStair == reachedStair) AddReward(0.75f);
-                else AddReward(0.375f);
+                if (closestStair == reachedStair) AddReward(0.5f);
+                else AddReward(0.35f);
             }
         }
 
@@ -325,12 +323,12 @@ public class AgentControl_From2F : Agent
             if (collision.gameObject.CompareTag("Floor"))
             {
                 if (inSpawnArea) onEpisode = true;
-                else spawnAgentScript.SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
+                else SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
             }
 
             else if (collision.gameObject.CompareTag("UpStair") || collision.gameObject.CompareTag("DownStair") || collision.gameObject.CompareTag("Obstacle"))
             {
-                spawnAgentScript.SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
+                SpawnAgent(param_SpawnableAreaNum, settings.doCurriculum);
             }
         }
     }
@@ -342,6 +340,244 @@ public class AgentControl_From2F : Agent
             inSpawnArea = true;
             GetClosestExitNum();
             GetClosestStairNum();
+        }
+    }
+
+    // Agent Spawn
+    public void SpawnAgent(float SpawnableAreaNum, bool doCurriculum)
+    {
+        // Curriculum training?
+        if (doCurriculum)
+        {
+            // 1F
+            // B stair side
+            if (SpawnableAreaNum == 10f)
+            {
+                this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
+                configuration = 10;
+            }
+
+            // A stair side
+            else if (SpawnableAreaNum == 11f)
+            {
+                int rand = Random.Range(0, 2 + 1);
+                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(10.0f, 11.0f), 3.5f, UnityEngine.Random.Range(-27.0f, -25.0f));
+
+                configuration = 11;
+            }
+
+            // C stair side
+            else if (SpawnableAreaNum == 12f)
+            {
+                int rand = Random.Range(0, 3 + 1);
+                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                else if (rand == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(80.0f, 84.0f), 3.5f, UnityEngine.Random.Range(-27.0f, -25.0f));
+
+                configuration = 12;
+            }
+
+            // 2F
+            // B stair side
+            if (SpawnableAreaNum == 20f)
+            {
+                int rand = Random.Range(0, 1 + 1);
+                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 48.0f), 8.5f, UnityEngine.Random.Range(-29.0f, -2.0f));
+                if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(48.0f, 51.5f), 8.5f, UnityEngine.Random.Range(-29.0f, -9.0f));
+
+                configuration = 20;
+            }
+
+            // A stair side
+            else if (SpawnableAreaNum == 21f)
+            {
+                int rand = Random.Range(0, 3 + 1);
+                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 43.5f), 8.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 43.5f), 8.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(10.0f, 14.0f), 8.5f, UnityEngine.Random.Range(-25.0f, -27.0f));
+                else if (rand == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(6.0f, 7.0f), 8.5f, UnityEngine.Random.Range(-27.0f, -10.0f));
+
+                configuration = 21;
+            }
+
+            // C stair side
+            else if (SpawnableAreaNum == 22f)
+            {
+                int rand = Random.Range(0, 3 + 1);
+                if (rand == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(51.5f, 96.0f), 8.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                else if (rand == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(51.5f, 96.0f), 8.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                else if (rand == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 8.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                else if (rand == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(80.0f, 84.0f), 8.5f, UnityEngine.Random.Range(-25.0f, -27.0f));
+
+                configuration = 22;
+            }
+
+            // All (1F and 2F)
+            else if (SpawnableAreaNum == 30f)
+            {
+                int rand_a = Random.Range(0, 1 + 1);
+
+                // 1F
+                if (rand_a == 0)
+                {
+                    int rand_c = Random.Range(0, 2 + 1);
+
+                    // B stair side
+                    if (rand_c == 0)
+                    {
+                        this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
+                        configuration = 10;
+                    }
+
+                    // A stair side
+                    else if (rand_c == 1)
+                    {
+                        int rand_b = Random.Range(0, 2 + 1);
+                        if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                        else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                        else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(10.0f, 11.0f), 3.5f, UnityEngine.Random.Range(-27.0f, -25.0f));
+
+                        configuration = 11;
+                    }
+
+                    // C stair side
+                    else if (rand_c == 2)
+                    {
+                        int rand_b = Random.Range(0, 3 + 1);
+                        if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                        else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                        else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                        else if (rand_b == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(80.0f, 84.0f), 3.5f, UnityEngine.Random.Range(-27.0f, -25.0f));
+
+                        configuration = 12;
+                    }
+                }
+
+                // 2F
+                else if (rand_a == 1)
+                {
+                    int rand_c = Random.Range(0, 2 + 1);
+
+                    // B stair side
+                    if (rand_c == 0)
+                    {
+                        int rand_b = Random.Range(0, 1 + 1);
+                        if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 48.0f), 8.5f, UnityEngine.Random.Range(-29.0f, -2.0f));
+                        if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(48.0f, 51.5f), 8.5f, UnityEngine.Random.Range(-29.0f, -9.0f));
+
+                        configuration = 20;
+                    }
+
+                    // A stair side
+                    else if (rand_c == 1)
+                    {
+                        int rand_b = Random.Range(0, 3 + 1);
+                        if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 43.5f), 8.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                        else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 43.5f), 8.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                        else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(10.0f, 14.0f), 8.5f, UnityEngine.Random.Range(-25.0f, -27.0f));
+                        else if (rand_b == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(6.0f, 7.0f), 8.5f, UnityEngine.Random.Range(-27.0f, -10.0f));
+
+                        configuration = 21;
+                    }
+
+                    // C stair side
+                    else if (rand_c == 22)
+                    {
+                        int rand_b = Random.Range(0, 3 + 1);
+                        if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(51.5f, 96.0f), 8.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                        else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(51.5f, 96.0f), 8.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                        else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 8.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                        else if (rand_b == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(80.0f, 84.0f), 8.5f, UnityEngine.Random.Range(-25.0f, -27.0f));
+
+                        configuration = 22;
+                    }
+                }
+            }
+        }
+
+        else
+        {
+            // All (1F and 2F)
+            int rand_a = Random.Range(0, 1 + 1);
+
+            // 1F
+            if (rand_a == 0)
+            {
+                int rand_c = Random.Range(0, 2 + 1);
+
+                // B stair side
+                if (rand_c == 0)
+                {
+                    this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 53.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -3.0f));
+                    configuration = 10;
+                }
+
+                // A stair side
+                else if (rand_c == 1)
+                {
+                    int rand_b = Random.Range(0, 2 + 1);
+                    if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                    else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 44.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                    else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(10.0f, 11.0f), 3.5f, UnityEngine.Random.Range(-27.0f, -25.0f));
+
+                    configuration = 11;
+                }
+
+                // C stair side
+                else if (rand_c == 2)
+                {
+                    int rand_b = Random.Range(0, 3 + 1);
+                    if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 96.0f), 3.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                    else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(53.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                    else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 3.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                    else if (rand_b == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(80.0f, 84.0f), 3.5f, UnityEngine.Random.Range(-27.0f, -25.0f));
+
+                    configuration = 12;
+                }
+            }
+
+            // 2F
+            else if (rand_a == 1)
+            {
+                int rand_c = Random.Range(0, 2 + 1);
+
+                // B stair side
+                if (rand_c == 0)
+                {
+                    int rand_b = Random.Range(0, 1 + 1);
+                    if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(44.0f, 48.0f), 8.5f, UnityEngine.Random.Range(-29.0f, -2.0f));
+                    if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(48.0f, 51.5f), 8.5f, UnityEngine.Random.Range(-29.0f, -9.0f));
+
+                    configuration = 20;
+                }
+
+                // A stair side
+                else if (rand_c == 1)
+                {
+                    int rand_b = Random.Range(0, 3 + 1);
+                    if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 43.5f), 8.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                    else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(2.0f, 43.5f), 8.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                    else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(10.0f, 14.0f), 8.5f, UnityEngine.Random.Range(-25.0f, -27.0f));
+                    else if (rand_b == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(6.0f, 7.0f), 8.5f, UnityEngine.Random.Range(-27.0f, -10.0f));
+
+                    configuration = 21;
+                }
+
+                // C stair side
+                else if (rand_c == 22)
+                {
+                    int rand_b = Random.Range(0, 3 + 1);
+                    if (rand_b == 0) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(51.5f, 96.0f), 8.5f, UnityEngine.Random.Range(-10.0f, -9.0f));
+                    else if (rand_b == 1) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(51.5f, 96.0f), 8.5f, UnityEngine.Random.Range(-29.0f, -28.0f));
+                    else if (rand_b == 2) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(87.0f, 92.0f), 8.5f, UnityEngine.Random.Range(-28.0f, -10.0f));
+                    else if (rand_b == 3) this.transform.localPosition = new Vector3(UnityEngine.Random.Range(80.0f, 84.0f), 8.5f, UnityEngine.Random.Range(-25.0f, -27.0f));
+
+                    configuration = 22;
+                }
+            }
         }
     }
 }

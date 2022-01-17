@@ -1,0 +1,503 @@
+default_settings: null
+behaviors:
+  2F_B_StairSide:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 2048
+      learning_rate: 0.0001
+      beta: 0.0001
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 512
+      num_layers: 3
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.995
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+      curiosity:
+        gamma: 0.995
+        strength: 0.05
+        network_settings:
+          normalize: false
+          hidden_units: 64
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+        learning_rate: 0.0003
+        encoding_size: 64
+    init_path: null
+    keep_checkpoints: 200
+    checkpoint_interval: 100000
+    max_steps: 2000000
+    time_horizon: 96
+    summary_freq: 10000
+    threaded: true
+    self_play: null
+    behavioral_cloning: null
+  2F_A_StairSide:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 2048
+      learning_rate: 0.0001
+      beta: 0.0001
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 512
+      num_layers: 3
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.995
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+      curiosity:
+        gamma: 0.995
+        strength: 0.05
+        network_settings:
+          normalize: false
+          hidden_units: 64
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+        learning_rate: 0.0003
+        encoding_size: 64
+    init_path: null
+    keep_checkpoints: 200
+    checkpoint_interval: 100000
+    max_steps: 10000000
+    time_horizon: 96
+    summary_freq: 10000
+    threaded: true
+    self_play: null
+    behavioral_cloning: null
+  2F_C_StairSide:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 2048
+      learning_rate: 0.0001
+      beta: 0.0001
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 512
+      num_layers: 3
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.995
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+      curiosity:
+        gamma: 0.995
+        strength: 0.05
+        network_settings:
+          normalize: false
+          hidden_units: 64
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+        learning_rate: 0.0003
+        encoding_size: 64
+    init_path: null
+    keep_checkpoints: 200
+    checkpoint_interval: 100000
+    max_steps: 10000000
+    time_horizon: 96
+    summary_freq: 10000
+    threaded: true
+    self_play: null
+    behavioral_cloning: null
+  1F_B_StairSide:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 2048
+      learning_rate: 0.0001
+      beta: 0.0001
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 512
+      num_layers: 3
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.995
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+      curiosity:
+        gamma: 0.995
+        strength: 0.05
+        network_settings:
+          normalize: false
+          hidden_units: 64
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+        learning_rate: 0.0003
+        encoding_size: 64
+    init_path: null
+    keep_checkpoints: 200
+    checkpoint_interval: 100000
+    max_steps: 2000000
+    time_horizon: 96
+    summary_freq: 10000
+    threaded: true
+    self_play: null
+    behavioral_cloning: null
+  1F_A_StairSide:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 2048
+      learning_rate: 0.0001
+      beta: 0.0001
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 512
+      num_layers: 3
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.995
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+      curiosity:
+        gamma: 0.995
+        strength: 0.05
+        network_settings:
+          normalize: false
+          hidden_units: 64
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+        learning_rate: 0.0003
+        encoding_size: 64
+    init_path: null
+    keep_checkpoints: 200
+    checkpoint_interval: 100000
+    max_steps: 10000000
+    time_horizon: 96
+    summary_freq: 10000
+    threaded: true
+    self_play: null
+    behavioral_cloning: null
+  1F_C_StairSide:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 64
+      buffer_size: 2048
+      learning_rate: 0.0001
+      beta: 0.0001
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 512
+      num_layers: 3
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+    reward_signals:
+      extrinsic:
+        gamma: 0.995
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+      curiosity:
+        gamma: 0.995
+        strength: 0.05
+        network_settings:
+          normalize: false
+          hidden_units: 64
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+        learning_rate: 0.0003
+        encoding_size: 64
+    init_path: null
+    keep_checkpoints: 200
+    checkpoint_interval: 100000
+    max_steps: 10000000
+    time_horizon: 96
+    summary_freq: 10000
+    threaded: true
+    self_play: null
+    behavioral_cloning: null
+env_settings:
+  env_path: C:\Users\yuta04\ML-Agents\EL_School\Apps\School_From2F
+  env_args: null
+  base_port: 5005
+  num_envs: 1
+  seed: -1
+engine_settings:
+  width: 480
+  height: 360
+  quality_level: 5
+  time_scale: 100.0
+  target_frame_rate: -1
+  capture_frame_rate: 60
+  no_graphics: false
+environment_parameters:
+  SpawnableAreaNum:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2657
+          value: 10.0
+      name: 1F_B_StairSide
+      completion_criteria:
+        behavior: 1F_B_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.6
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2658
+          value: 11.0
+      name: 1F_A_StairSide
+      completion_criteria:
+        behavior: 1F_A_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2659
+          value: 12.0
+      name: 1F_C_StairSide
+      completion_criteria:
+        behavior: 1F_C_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2660
+          value: 20.0
+      name: 2F_B_StairSide
+      completion_criteria:
+        behavior: 2F_B_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.6
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2661
+          value: 21.0
+      name: 2F_A_StairSide
+      completion_criteria:
+        behavior: 2F_A_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2662
+          value: 22.0
+      name: 2F_C_StairSide
+      completion_criteria:
+        behavior: 2F_C_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2663
+          value: 30.0
+      name: All
+      completion_criteria: null
+  StepReward:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2664
+          value: -0.0002
+      name: 1F_B_StairSide
+      completion_criteria:
+        behavior: 1F_B_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.6
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2665
+          value: -0.0002
+      name: 1F_A_StairSide
+      completion_criteria:
+        behavior: 1F_A_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2666
+          value: -0.0002
+      name: 1F_C_StairSide
+      completion_criteria:
+        behavior: 1F_C_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2667
+          value: -0.0002
+      name: 2F_B_StairSide
+      completion_criteria:
+        behavior: 2F_B_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.6
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2668
+          value: -0.0002
+      name: 2F_A_StairSide
+      completion_criteria:
+        behavior: 2F_A_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2669
+          value: -0.0002
+      name: 2F_C_StairSide
+      completion_criteria:
+        behavior: 2F_C_StairSide
+        measure: reward
+        min_lesson_length: 100
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 2670
+          value: -0.00025
+      name: All
+      completion_criteria: null
+checkpoint_settings:
+  run_id: School_From2F_1
+  initialize_from: null
+  load_model: false
+  resume: false
+  force: false
+  train_model: false
+  inference: false
+  results_dir: results
+torch_settings:
+  device: null
+debug: false
