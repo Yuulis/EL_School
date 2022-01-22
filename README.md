@@ -10,7 +10,7 @@ Using [ML-Agents](https://github.com/Unity-Technologies/ml-agents) in [Release 1
 ## Env-1. School_Only1F
 
 ### Image
-![Stage](images/Stage_Only1F.png)
+![Stage](https://user-images.githubusercontent.com/79734873/150643360-931afeef-303c-4b48-a7ca-15c2fe9c80f8.png)
 
 ### Environment
 * **Exit1 ~ 3** : When Agent touched them, one episode will success and be ended. 
