@@ -252,6 +252,26 @@ public class AgentControl_Only1F_result : Agent
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!inSpawnArea)
+        {
+            if (collision.gameObject.CompareTag("UpStair") || collision.gameObject.CompareTag("DownStair") || collision.gameObject.CompareTag("Obstacle"))
+            {
+                dataCountScript.EpisodeCounter++;
+
+                if (settings.DoCSVEXport)
+                {
+                    csvExportScript.SaveData(
+                    SpawnPosX.ToString(),
+                    SpawnPosZ.ToString(),
+                    "-1",
+                    ReachedExitNum.ToString()
+                    );
+
+                    EndEpisode();
+                }
+            }
+        }
+
         // During Episode?
         if (onEpisode)
         {
